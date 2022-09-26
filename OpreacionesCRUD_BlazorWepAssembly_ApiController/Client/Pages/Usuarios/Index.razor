@@ -1,0 +1,68 @@
+﻿@page "/Usuarios"
+@inject HttpClient Http
+<h3>Estudiantes</h3>
+<div>
+    <a class="btn btn-success" href="CrearUsuario">Nuevo Usuario</a>
+</div>
+@if (_Usuarios == null)
+{
+    <text>Cargando...</text>
+}
+else if (_Usuarios.Length == 0)
+{
+    <text>No hay Personas en la Base de Datos</text>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th></th>
+                <th>Id</th>
+                <th>Nombre</th>
+                <th>Clave</th>
+                <th>Roles</th>
+                <th>carreras</th>
+                <th>Materias</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var usuarios in _Usuarios)
+           {
+             <tr>
+               <td>
+                   <a  class="btn btn-success">Editar</a>
+                   <button class="btn btn-danger">Borrar</button>
+               </td>
+               <td>@usuarios.Id</td>
+               <td>@usuarios.Nombre</td>
+               <td>@usuarios.Clave</td>
+               <td>@usuarios.Roles</td>
+               <td>@usuarios.carreras</td>
+               <td>@usuarios.Materias</td>
+               
+             </tr>
+           }
+        </tbody>
+    </table>
+}
+@code {
+
+    Usuarios[] _Usuarios{ get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        await CargarUsuarios();
+    }
+
+    async Task CargarUsuarios()
+    {
+        _Usuarios = await Http.GetFromJsonAsync<Usuarios[]>("Users");
+        _Usuarios = new Usuarios[]
+        {
+            new Usuarios(){Id = 1, Nombre = "Felipe",Clave="123",Roles="Estudiante",carreras="Farmacia",Materias ="Psicologia,Quimica"},
+            new Usuarios(){Id = 2, Nombre = "Andres",Clave="456",Roles="Estudiante",carreras="Ing. Civil",Materias ="Sociales"},
+        }; 
+    }
+
+}

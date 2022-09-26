@@ -1,0 +1,88 @@
+﻿@page "/CrearUsuario"
+@inject   HttpClient _http
+@inject NavigationManager _NavigationManager
+<h3>Nuevo Usuario</h3>
+<EditForm Model="@_Usuario" OnInvalidSubmit="@CrearUsuario">
+     <div class="form-field">
+         <label>Nombre:</label>
+         <div>
+             <InputText @bind-Value="@_Usuario.Nombre"/>
+             <ValidationMessage For="@(()=>_Usuario.Nombre)"/>
+         </div>
+
+          <label>Correo:</label>
+         <div>
+             <InputText @bind-Value="@_Usuario.Correo"/>
+             <ValidationMessage For="@(()=>_Usuario.Correo)"/>
+         </div>
+
+          <label>PassWord Usuario:</label>
+         <div>
+             <InputText @bind-Value="@_Usuario.Clave"/>
+             <ValidationMessage For="@(()=>_Usuario.Clave)"/>
+         </div>
+
+          <label>Roles Usuario:</label>
+           <div>
+                <InputSelect class="form-select" @bind-Value="@_Usuario.Roles"> 
+                    <option value="0" selected>Estudiante</option>
+                    <option value="1" selected>Administrador</option>
+                    <ValidationMessage For="@(()=>_Usuario.Roles)"/>
+                   
+                
+                </InputSelect>
+           </div>
+
+          <label>Carrera Universidad:</label>
+           <div>
+                <InputSelect class="form-select" @bind-Value="@_Usuario.carreras"> 
+                    <option value="0" selected>Ing. Quimica Industrial</option>
+                    <option value="1" selected>Ing. Sistemas Computacionales</option>
+                    <option value="2" selected>Psicologia</option>
+                    <option value="3" selected>Ing. Arquitectura</option>
+                    <option value="4" selected>Administracion de Empresas</option>
+                    <option value="5" selected>Ing. Informatica Empresarial</option>
+                
+                </InputSelect>
+           </div>
+
+           <label>Materias Usuario:</label>
+           <div>
+                <InputSelect class="form-select" @bind-Value="@_Usuario.Materias"> 
+                    <option value="0" selected>Sin Materias</option>
+                    <option value="1" selected>Ingles basico</option>
+                    <option value="2" selected>BASES DE DATOS I</option>
+                    <option value="3" selected>Elementos de computacion</option>
+                    <option value="4" selected>REQUERIMIENTOS DE SOFTWARE</option>
+                    <option value="5" selected>Laboratorio de materiales II</option>
+                
+                </InputSelect>
+           </div>
+         
+         
+     </div>
+     <button type="submit" class="btn btn-success">Guardar Usuario</button>
+     <DataAnnotationsValidator/>
+</EditForm>
+
+@code {
+
+    Usuarios _Usuario = new Usuarios();
+    //MateriasUniversidad _materias = new MateriasUniversidad();
+    //List<MateriasUniversidad> materias = new List<MateriasUniversidad>()
+    //    {
+    //        new MateriasUniversidad(){Id=1,Name="Ingles basico"},
+    //        new MateriasUniversidad(){Id=2,Name="Matematica General"},
+    //        new MateriasUniversidad(){Id=3,Name="Laboratorio I"},
+    //        new MateriasUniversidad(){Id=4,Name="Elementos de computacion"},
+    //        new MateriasUniversidad(){Id=5,Name="Laboratorio de materiales II"},
+    //        new MateriasUniversidad(){Id=6,Name="BASES DE DATOS I"},
+    //        new MateriasUniversidad(){Id=7,Name="REQUERIMIENTOS DE SOFTWARE"},
+    //    };
+    async Task CrearUsuario()
+    {
+        await _http.PostAsJsonAsync<Usuarios>("Users",_Usuario);
+        _NavigationManager.NavigateTo("Usuarios");
+
+    }
+}
