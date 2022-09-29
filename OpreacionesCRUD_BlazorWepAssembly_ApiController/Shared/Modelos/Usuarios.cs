@@ -25,8 +25,14 @@ namespace OpreacionesCRUD_BlazorWepAssembly_ApiController.Shared.Modelos
         [Required(ErrorMessage = "El Campo {0} es Requerido!!."), StringLength(100)]
         public string ? Roles { get; set; }
 
+        [Required,StringLength(500)]
+        public string? carreras { get; set; }
 
-        public virtual List<CarreraUniversidad>?  CarreraUniversidad { get; set; }
+        [Required, StringLength(500)]
+        public string? Materias { get; set; }
+
+
+        //public virtual List<CarreraUniversidad>?  CarreraUniversidad { get; set; }
 
     }
 }

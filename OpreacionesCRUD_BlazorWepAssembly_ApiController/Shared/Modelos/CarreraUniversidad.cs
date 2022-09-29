@@ -15,8 +15,8 @@ namespace OpreacionesCRUD_BlazorWepAssembly_ApiController.Shared.Modelos
         [Required, StringLength(50)]
         public string ? NombreCarrera { get; set; }
 
-        public Usuarios? usuarios { get; set; }
+        //public Usuarios? usuarios { get; set; }
 
-        public virtual List<MateriasUniversidad>? MateriasUniversidads { get; set; }
+        //public virtual List<MateriasUniversidad>? MateriasUniversidads { get; set; }
     }
 }

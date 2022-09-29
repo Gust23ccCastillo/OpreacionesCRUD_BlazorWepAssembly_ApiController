@@ -29,7 +29,7 @@
                 </InputSelect>
            </div>
 
-         @* <label>Carrera Universidad:</label>
+        @*  <label>Carrera Universidad:</label>
            <div>
                 <InputSelect class="form-select" @bind-Value="@_Usuario.carreras"> 
                     <option value="0" selected>Ing. Quimica Industrial</option>
@@ -57,13 +57,13 @@
          
          
      </div>
-     <button type="submit" class="btn btn-success">@TextBoton</button>
+     <button type="submit" class="btn btn-success">@NombredelBoton</button>
      <DataAnnotationsValidator/>
 </EditForm>
 
 @code {
 
     [Parameter] public Usuarios _UsuarioGeneral { get; set; } = new Usuarios();
-    [Parameter] public  string TextBoton { get; set; } = "Guardar Usuario";
+    [Parameter] public  string NombredelBoton { get; set; } = "Guardar Usuario";
     [Parameter] public EventCallback OnValidSumit { get; set; }
 }

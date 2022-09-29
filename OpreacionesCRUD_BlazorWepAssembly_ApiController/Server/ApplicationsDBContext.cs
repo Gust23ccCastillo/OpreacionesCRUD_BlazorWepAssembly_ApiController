@@ -11,8 +11,8 @@ namespace OpreacionesCRUD_BlazorWepAssembly_ApiController.Server
         }
 
         public DbSet<Usuarios> _usuarios { get; set; }
-        public DbSet<CarreraUniversidad> _carreraUniversidad { get; set; }
-        public DbSet<MateriasUniversidad> _materiasUniversidad { get; set; }
+        //public DbSet<CarreraUniversidad> _carreraUniversidad { get; set; }
+        //public DbSet<MateriasUniversidad> _materiasUniversidad { get; set; }
     }
 
 }
