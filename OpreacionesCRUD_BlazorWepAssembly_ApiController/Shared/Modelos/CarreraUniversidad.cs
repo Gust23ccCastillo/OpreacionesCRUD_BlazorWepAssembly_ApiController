@@ -9,9 +9,14 @@ namespace OpreacionesCRUD_BlazorWepAssembly_ApiController.Shared.Modelos
 {
     public  class CarreraUniversidad
     {
-        public int Id { get; set; }
+        [Key]
+        public int IdCarrera { get; set; }
 
         [Required, StringLength(50)]
         public string ? NombreCarrera { get; set; }
+
+        public Usuarios? usuarios { get; set; }
+
+        public virtual List<MateriasUniversidad>? MateriasUniversidads { get; set; }
     }
 }

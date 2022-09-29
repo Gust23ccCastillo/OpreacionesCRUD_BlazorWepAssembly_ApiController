@@ -9,10 +9,13 @@ namespace OpreacionesCRUD_BlazorWepAssembly_ApiController.Shared.Modelos
 {
     public class MateriasUniversidad
     {
-        public int Id { get; set; }
+        [Key]
+        public int IdMaterias { get; set; }
 
         [Required, StringLength(50)]
-        public string ? NombreMateria { get; set; }
+        public string ? NombresMaterias { get; set; }
+
+        public CarreraUniversidad? _CarreraAsignada { get; set; }
     }
 
 }

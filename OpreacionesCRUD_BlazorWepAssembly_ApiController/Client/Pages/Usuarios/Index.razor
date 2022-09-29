@@ -1,5 +1,6 @@
 ﻿@page "/Usuarios"
 @inject HttpClient Http
+@inject IJSRuntime js
 <h3>Estudiantes</h3>
 <div>
     <a class="btn btn-success" href="CrearUsuario">Nuevo Usuario</a>
@@ -50,6 +51,7 @@ else
 
     Usuarios[] _Usuarios{ get; set; }
 
+
     protected override async Task OnInitializedAsync()
     {
         await CargarUsuarios();
@@ -59,16 +61,23 @@ else
     {
         _Usuarios = await Http.GetFromJsonAsync<Usuarios[]>("Users");
         _Usuarios = new Usuarios[]
+
         {
-            new Usuarios(){Id = 1, Nombre = "Felipe",Clave="123",Roles="Estudiante",carreras="Farmacia",Materias ="Psicologia,Quimica"},
-            new Usuarios(){Id = 2, Nombre = "Andres",Clave="456",Roles="Estudiante",carreras="Ing. Civil",Materias ="Sociales"},
+            new Usuarios(){Id = 1, Nombre = "Felipe",Clave="123",Roles="Estudiante",},
+            new Usuarios(){Id = 2, Nombre = "Andres",Clave="456",Roles="Estudiante", }
         }; 
     }
 
     async Task BorrarUsuarios(int IdUsuario)
     {
-        await Http.DeleteAsync($"Users/{IdUsuario}");
-        await CargarUsuarios();
+        var UsuarioSelect = _Usuarios.First(x => x.Id == IdUsuario);
+        string mensajeEliminar = $"Deses Eliminar al Usuario: {UsuarioSelect.Nombre}";
+        if (await js.InvokeAsync<bool>("confirm", mensajeEliminar))
+        {
+             await Http.DeleteAsync($"Users/{IdUsuario}");
+             await CargarUsuarios();
+        }
+       
     }
 
 }

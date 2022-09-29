@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace OpreacionesCRUD_BlazorWepAssembly_ApiController.Shared.Modelos
 {
-    public class Usuarios:IEstudiante,IUsuarioLogeo
+    public class Usuarios
     {
         public int Id { get; set; }
         [Required(ErrorMessage ="El Campo {0} es Requerido!!."),StringLength(20)]
@@ -26,11 +26,7 @@ namespace OpreacionesCRUD_BlazorWepAssembly_ApiController.Shared.Modelos
         public string ? Roles { get; set; }
 
 
-        [Required,StringLength(500)]
-        public string ? Materias { get; set; }
-
-        [Required,StringLength(500)]
-        public string? carreras { get; set; }
+        public virtual List<CarreraUniversidad>?  CarreraUniversidad { get; set; }
 
     }
 }
