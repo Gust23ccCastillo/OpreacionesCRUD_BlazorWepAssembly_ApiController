@@ -31,8 +31,8 @@ else
            {
              <tr>
                <td>
-                   <a  class="btn btn-success">Editar</a>
-                   <button class="btn btn-danger">Borrar</button>
+                   <a  class="btn btn-success" href="editar-Usuario/@usuarios.Id">Editar</a>
+                   <button class="btn btn-danger" @onclick="@(()=>BorrarUsuarios(usuarios.Id))">Borrar</button>
                </td>
                <td>@usuarios.Id</td>
                <td>@usuarios.Nombre</td>
@@ -63,6 +63,12 @@ else
             new Usuarios(){Id = 1, Nombre = "Felipe",Clave="123",Roles="Estudiante",carreras="Farmacia",Materias ="Psicologia,Quimica"},
             new Usuarios(){Id = 2, Nombre = "Andres",Clave="456",Roles="Estudiante",carreras="Ing. Civil",Materias ="Sociales"},
         }; 
+    }
+
+    async Task BorrarUsuarios(int IdUsuario)
+    {
+        await Http.DeleteAsync($"Users/{IdUsuario}");
+        await CargarUsuarios();
     }
 
 }

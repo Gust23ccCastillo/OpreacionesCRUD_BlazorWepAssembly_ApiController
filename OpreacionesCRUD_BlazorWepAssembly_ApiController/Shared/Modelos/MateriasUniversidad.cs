@@ -12,7 +12,7 @@ namespace OpreacionesCRUD_BlazorWepAssembly_ApiController.Shared.Modelos
         public int Id { get; set; }
 
         [Required, StringLength(50)]
-        public string NombreMateria { get; set; }
+        public string ? NombreMateria { get; set; }
     }
 
 }

@@ -1,0 +1,22 @@
+﻿@page "/editar-Usuario/{IdUsuario:int}"
+@inject HttpClient _Http
+@inject NavigationManager _NavigationManager
+
+<h3>Editar Usuario</h3>
+
+@code {
+
+    [Parameter] public int IdUsuario { get; set; }
+    Usuarios _Usuarios = new Usuarios();
+
+    protected async override Task OnParametersSetAsync()
+    {
+        _Usuarios = await _Http.GetFromJsonAsync<Usuarios>($"Users/{IdUsuario}");
+    }
+
+    async Task EditUsuarios()
+    {
+        await _Http.PutAsJsonAsync("Users", _Usuarios);
+        _NavigationManager.NavigateTo("Usuarios");
+    }
+}

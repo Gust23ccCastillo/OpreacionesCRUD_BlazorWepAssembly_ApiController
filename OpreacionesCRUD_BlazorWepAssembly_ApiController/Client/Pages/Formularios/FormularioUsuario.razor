@@ -1,0 +1,69 @@
+﻿<EditForm Model="@_UsuarioGeneral" OnValidSubmit="@OnValidSumit">
+     <div class="form-field">
+         <label>Nombre:</label>
+         <div>
+             <InputText @bind-Value="@_UsuarioGeneral.Nombre"/>
+             <ValidationMessage For="@(()=>_UsuarioGeneral.Nombre)"/>
+         </div>
+
+          <label>Correo:</label>
+         <div>
+             <InputText @bind-Value="@_UsuarioGeneral.Correo"/>
+             <ValidationMessage For="@(()=>_UsuarioGeneral.Correo)"/>
+         </div>
+
+          <label>PassWord Usuario:</label>
+         <div>
+             <InputText @bind-Value="@_UsuarioGeneral.Clave"/>
+             <ValidationMessage For="@(()=>_UsuarioGeneral.Clave)"/>
+         </div>
+
+          <label>Roles Usuario:</label>
+           <div>
+                <InputSelect class="form-select" @bind-Value="@_UsuarioGeneral.Roles"> 
+                    <option value="0" selected>Estudiante</option>
+                    <option value="1" selected>Administrador</option>
+                    <ValidationMessage For="@(()=>_UsuarioGeneral.Roles)"/>
+                   
+                
+                </InputSelect>
+           </div>
+
+         @* <label>Carrera Universidad:</label>
+           <div>
+                <InputSelect class="form-select" @bind-Value="@_Usuario.carreras"> 
+                    <option value="0" selected>Ing. Quimica Industrial</option>
+                    <option value="1" selected>Ing. Sistemas Computacionales</option>
+                    <option value="2" selected>Psicologia</option>
+                    <option value="3" selected>Ing. Arquitectura</option>
+                    <option value="4" selected>Administracion de Empresas</option>
+                    <option value="5" selected>Ing. Informatica Empresarial</option>
+                
+                </InputSelect>
+           </div>
+
+           <label>Materias Usuario:</label>
+           <div>
+                <InputSelect class="form-select" @bind-Value="@_Usuario.Materias"> 
+                    <option value="0" selected>Sin Materias</option>
+                    <option value="1" selected>Ingles basico</option>
+                    <option value="2" selected>BASES DE DATOS I</option>
+                    <option value="3" selected>Elementos de computacion</option>
+                    <option value="4" selected>REQUERIMIENTOS DE SOFTWARE</option>
+                    <option value="5" selected>Laboratorio de materiales II</option>
+                
+                </InputSelect>
+           </div>*@
+         
+         
+     </div>
+     <button type="submit" class="btn btn-success">@TextBoton</button>
+     <DataAnnotationsValidator/>
+</EditForm>
+
+@code {
+
+    [Parameter] public Usuarios _UsuarioGeneral { get; set; } = new Usuarios();
+    [Parameter] public  string TextBoton { get; set; } = "Guardar Usuario";
+    [Parameter] public EventCallback OnValidSumit { get; set; }
+}

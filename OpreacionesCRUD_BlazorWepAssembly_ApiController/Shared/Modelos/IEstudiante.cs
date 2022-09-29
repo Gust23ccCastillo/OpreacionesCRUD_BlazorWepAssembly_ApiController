@@ -7,11 +7,13 @@ using System.Threading.Tasks;
 
 namespace OpreacionesCRUD_BlazorWepAssembly_ApiController.Shared.Modelos
 {
-    public  class CarreraUniversidad
+    public interface IEstudiante
     {
-        public int Id { get; set; }
+      
+        public string? Nombre { get; set; }
 
-        [Required, StringLength(50)]
-        public string ? NombreCarrera { get; set; }
+        public string? Materias { get; set; }
+
+        public string? carreras { get; set; }
     }
 }

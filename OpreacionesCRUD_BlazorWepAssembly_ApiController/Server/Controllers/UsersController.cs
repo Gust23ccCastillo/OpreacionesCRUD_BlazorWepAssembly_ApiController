@@ -36,5 +36,23 @@ namespace OpreacionesCRUD_BlazorWepAssembly_ApiController.Server.Controllers
             await _dbContext.SaveChangesAsync();
             return new CreatedAtRouteResult("obtenerUsuario", new {id = usuarios.Id},usuarios);
         }
+
+        [HttpPut]
+        public async Task<ActionResult> EditarUsuarios(Usuarios usuario)
+        {
+            _dbContext.Entry(usuario).State = EntityState.Modified;
+            await _dbContext.SaveChangesAsync();
+            return NoContent();
+        }
+
+
+        [HttpDelete("{id}")]
+        public async Task<ActionResult> EliminarUsuario(int id)
+        {
+           var Usuario = new Usuarios { Id = id };
+            _dbContext.Remove(Usuario);
+            await _dbContext.SaveChangesAsync();
+            return NoContent();
+        }
     }
 }

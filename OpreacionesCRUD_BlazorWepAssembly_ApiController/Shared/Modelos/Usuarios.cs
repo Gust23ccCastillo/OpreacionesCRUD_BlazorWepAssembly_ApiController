@@ -7,26 +7,30 @@ using System.Threading.Tasks;
 
 namespace OpreacionesCRUD_BlazorWepAssembly_ApiController.Shared.Modelos
 {
-    public class Usuarios
+    public class Usuarios:IEstudiante,IUsuarioLogeo
     {
         public int Id { get; set; }
-        [Required(ErrorMessage ="El Campo {0} es Requerido!!.")]
-        public string Nombre { get; set; }
+        [Required(ErrorMessage ="El Campo {0} es Requerido!!."),StringLength(20)]
+        public string ? Nombre { get; set; }
 
-        [Required(ErrorMessage = "El Campo {0} es Requerido!!.")]
-        public string Correo { get; set; }
 
-        [Required(ErrorMessage = "El Campo {0} es Requerido!!.")]
-        public string Clave { get; set; }
+        [Required(ErrorMessage = "El Campo {0} es Requerido!!."),StringLength(20)]
+        public string ? Correo { get; set; }
+
+
+        [Required(ErrorMessage = "El Campo {0} es Requerido!!."),StringLength(25)]
+        public string ? Clave { get; set; }
+
 
         [Required(ErrorMessage = "El Campo {0} es Requerido!!."), StringLength(100)]
-        public string Roles { get; set; }
+        public string ? Roles { get; set; }
+
 
         [Required,StringLength(500)]
-        public string Materias { get; set; }
+        public string ? Materias { get; set; }
 
         [Required,StringLength(500)]
-        public string carreras { get; set; }
+        public string? carreras { get; set; }
 
     }
 }
