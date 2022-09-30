@@ -12,11 +12,12 @@ namespace OpreacionesCRUD_BlazorWepAssembly_ApiController.Shared.Modelos
         [Key]
         public int IdCarrera { get; set; }
 
-        [Required, StringLength(50)]
+        [Required(ErrorMessage = "El Campo {0} es Requerido!!."), StringLength(50)]
         public string ? NombreCarrera { get; set; }
 
-        //public Usuarios? usuarios { get; set; }
+        [Required(ErrorMessage = "El Campo {0} es Requerido!!."), StringLength(50)]
+        public string? CodigoCarrera { get; set; }
 
-        //public virtual List<MateriasUniversidad>? MateriasUniversidads { get; set; }
+
     }
 }

@@ -32,7 +32,5 @@ namespace OpreacionesCRUD_BlazorWepAssembly_ApiController.Shared.Modelos
         public string? Materias { get; set; }
 
 
-        //public virtual List<CarreraUniversidad>?  CarreraUniversidad { get; set; }
-
     }
 }

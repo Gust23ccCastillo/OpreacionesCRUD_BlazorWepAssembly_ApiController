@@ -1,0 +1,19 @@
+﻿@page "/NuevaCarrera"
+@inject HttpClient _http
+@inject NavigationManager _NavigationManager
+
+
+<h3>Agregar Nueva Carrera</h3>
+
+<FormularioCarrerasUniversitarias _carreraUniversidad="@_carreraUniversidad" NombreBoton="Agregar Carrera" OnValidSumit="@CrearCarrera"/>
+
+@code {
+    CarreraUniversidad _carreraUniversidad = new CarreraUniversidad();
+
+     async Task CrearCarrera()
+    {
+        await _http.PostAsJsonAsync<CarreraUniversidad>("CarrerasGenerales",_carreraUniversidad);
+        _NavigationManager.NavigateTo("ListasCarrerasGenerales");
+
+    }
+}

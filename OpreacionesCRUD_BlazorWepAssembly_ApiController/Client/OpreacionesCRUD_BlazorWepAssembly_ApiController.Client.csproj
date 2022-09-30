@@ -15,4 +15,8 @@
     <ProjectReference Include="..\Shared\OpreacionesCRUD_BlazorWepAssembly_ApiController.Shared.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Pages\MateriasCarrera\" />
+  </ItemGroup>
+
 </Project>

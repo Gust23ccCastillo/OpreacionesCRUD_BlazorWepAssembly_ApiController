@@ -29,9 +29,9 @@
                 </InputSelect>
            </div>
 
-        @*  <label>Carrera Universidad:</label>
+          <label>Carrera Universidad:</label>
            <div>
-                <InputSelect class="form-select" @bind-Value="@_Usuario.carreras"> 
+                <InputSelect class="form-select" @bind-Value="@_UsuarioGeneral.carreras"> 
                     <option value="0" selected>Ing. Quimica Industrial</option>
                     <option value="1" selected>Ing. Sistemas Computacionales</option>
                     <option value="2" selected>Psicologia</option>
@@ -42,9 +42,13 @@
                 </InputSelect>
            </div>
 
-           <label>Materias Usuario:</label>
+
+            <label>Las Materias Son 4 Maximas Por Cuatrimestre:</label>
+            <br/>
+
+           <label>Materia 01 del Usuario:</label>
            <div>
-                <InputSelect class="form-select" @bind-Value="@_Usuario.Materias"> 
+                <InputSelect class="form-select" @bind-Value="@_UsuarioGeneral.Materias"> 
                     <option value="0" selected>Sin Materias</option>
                     <option value="1" selected>Ingles basico</option>
                     <option value="2" selected>BASES DE DATOS I</option>
@@ -53,7 +57,46 @@
                     <option value="5" selected>Laboratorio de materiales II</option>
                 
                 </InputSelect>
-           </div>*@
+           </div>
+
+            <label>Materia 02 del Usuario:</label>
+           <div>
+                <InputSelect class="form-select" @bind-Value="@_UsuarioGeneral.Materias"> 
+                    <option value="0" selected>Sin Materias</option>
+                    <option value="1" selected>Ingles basico</option>
+                    <option value="2" selected>BASES DE DATOS I</option>
+                    <option value="3" selected>Elementos de computacion</option>
+                    <option value="4" selected>REQUERIMIENTOS DE SOFTWARE</option>
+                    <option value="5" selected>Laboratorio de materiales II</option>
+                
+                </InputSelect>
+           </div>
+
+            <label>Materia 03 del Usuario:</label>
+           <div>
+                <InputSelect class="form-select" @bind-Value="@_UsuarioGeneral.Materias"> 
+                    <option value="0" selected>Sin Materias</option>
+                    <option value="1" selected>Ingles basico</option>
+                    <option value="2" selected>BASES DE DATOS I</option>
+                    <option value="3" selected>Elementos de computacion</option>
+                    <option value="4" selected>REQUERIMIENTOS DE SOFTWARE</option>
+                    <option value="5" selected>Laboratorio de materiales II</option>
+                
+                </InputSelect>
+           </div>
+
+            <label>Materia 04 del Usuario:</label>
+           <div>
+                <InputSelect class="form-select" @bind-Value="@_UsuarioGeneral.Materias"> 
+                    <option value="0" selected>Sin Materias</option>
+                    <option value="1" selected>Ingles basico</option>
+                    <option value="2" selected>BASES DE DATOS I</option>
+                    <option value="3" selected>Elementos de computacion</option>
+                    <option value="4" selected>REQUERIMIENTOS DE SOFTWARE</option>
+                    <option value="5" selected>Laboratorio de materiales II</option>
+                
+                </InputSelect>
+           </div>
          
          
      </div>

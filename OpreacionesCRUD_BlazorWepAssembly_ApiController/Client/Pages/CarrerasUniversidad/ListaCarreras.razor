@@ -1,0 +1,78 @@
+﻿@page "/ListasCarrerasGenerales"
+@inject HttpClient Http
+@inject IJSRuntime js
+
+<div>
+    <a class="btn btn-success" href="NuevaCarrera">Nueva Carrera</a>
+</div>
+
+<h3>Lista De Todas Las Carreras</h3>
+
+
+@if (_Carreras == null)
+{
+    <text>Cargando...</text>
+}
+else if (_Carreras.Length == 0)
+{
+    <text>Carreras No Disponibles!!.</text>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th></th>
+                <th>Id</th>
+                <th>Nombre De Carrera Universitaria</th>
+                <th>Codigo De Carrera Universitaria</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var carrera in _Carreras)
+           {
+             <tr>
+               <td>
+
+                   <button class="btn btn-danger" @onclick="@(()=>BorrarUsuarios(carrera.IdCarrera))">Eliminar Carrera</button>
+               </td>
+               <td>@carrera.IdCarrera</td>
+               <td>@carrera.NombreCarrera</td>
+               <td>@carrera.CodigoCarrera</td>
+               
+             </tr>
+           }
+        </tbody>
+    </table>
+}
+
+@code {
+    CarreraUniversidad[]? _Carreras { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        await CargarCarrera();
+    }
+
+    async Task CargarCarrera()
+    {
+        _Carreras = await Http.GetFromJsonAsync<CarreraUniversidad[]>("CarrerasGenerales");
+        _Carreras = new CarreraUniversidad[]
+        {
+           new CarreraUniversidad(){IdCarrera=1,NombreCarrera="Ingenieria Civil",CodigoCarrera="0102"},
+           new CarreraUniversidad(){IdCarrera=2,NombreCarrera="Ingenieria Sistemas Computacionales",CodigoCarrera="0103"},
+        }; 
+    }
+
+    async Task BorrarUsuarios(int IdCarrera)
+    {
+        var UsuarioSelect = _Carreras.First(x => x.IdCarrera == IdCarrera);
+        string mensajeEliminar = $"Deses Eliminar la Carrera Universitaria del Sistema? : {UsuarioSelect.NombreCarrera}";
+        if (await js.InvokeAsync<bool>("confirm", mensajeEliminar))
+        {
+             await Http.DeleteAsync($"CarrerasGenerales/{IdCarrera}");
+             await CargarCarrera();
+        }
+       
+    }
+}
