@@ -14,32 +14,69 @@
                 <span class="oi oi-home" aria-hidden="true"></span> Home
             </NavLink>
         </div>
-        <div class="nav-item px-3">
-            <NavLink class="nav-link" href="counter">
-                <span class="oi oi-plus" aria-hidden="true"></span> Counter
-            </NavLink>
-        </div>
-        <div class="nav-item px-3">
-            <NavLink class="nav-link" href="fetchdata">
-                <span class="oi oi-list-rich" aria-hidden="true"></span> Fetch data
-            </NavLink>
-        </div>
-         <div class="nav-item px-3">
-            <NavLink class="nav-link" href="Usuarios">
-                <span class="oi oi-people" aria-hidden="true"></span>Lista de Estudiantes
-            </NavLink>
-        </div>
-         <div class="nav-item px-3">
-            <NavLink class="nav-link" href="CrearUsuario">
-                <span class="oi oi-person" aria-hidden="true"></span>Nuevo Usuario
-            </NavLink>
-        </div>
+        <AuthorizeView Roles="Administrator,User">
+            <Authorized>
+                   <div class="nav-item px-3">
+                        <NavLink class="nav-link" href="counter">
+                            <span class="oi oi-plus" aria-hidden="true"></span> Counter
+                        </NavLink>
+                  </div>
+            </Authorized>
+        </AuthorizeView>
+         <AuthorizeView Roles="Administrator,User">
+            <Authorized>
+                   <div class="nav-item px-3">
+                        <NavLink class="nav-link" href="fetchdata">
+                            <span class="oi oi-list-rich" aria-hidden="true"></span> Fetch data
+                        </NavLink>
+                    </div>
+            </Authorized>
+        </AuthorizeView>
+         <AuthorizeView Roles="Administrator">
+            <Authorized>
+                    <div class="nav-item px-3">
+                        <NavLink class="nav-link" href="Usuarios">
+                            <span class="oi oi-people" aria-hidden="true"></span>Lista de Estudiantes
+                        </NavLink>
+                    </div>
+            </Authorized>
+        </AuthorizeView>
+         <AuthorizeView Roles="Administrator">
+            <Authorized>
+                   <div class="nav-item px-3">
+                        <NavLink class="nav-link" href="CrearUsuario">
+                            <span class="oi oi-person" aria-hidden="true"></span>Nuevo Usuario
+                        </NavLink>
+                    </div>
+            </Authorized>
+        </AuthorizeView>
+         <AuthorizeView Roles="Administrator">
+            <Authorized>
+                  <div class="nav-item px-3">
+                        <NavLink class="nav-link" href="ListasCarrerasGenerales">
+                            <span class="oi oi-book" aria-hidden="true"></span>Lista Carreras Totales.
+                        </NavLink>
+                  </div>
+            </Authorized>
+        </AuthorizeView>
+          <AuthorizeView Roles="Administrator">
+            <Authorized>
+                  <div class="nav-item px-3">
+                        <NavLink class="nav-link" href="ListasMateriasGenerales">
+                            <span class="oi oi-document" aria-hidden="true"></span>Lista Materias Totales.
+                        </NavLink>
+                  </div>
+            </Authorized>
+        </AuthorizeView>
        
-         <div class="nav-item px-3">
-            <NavLink class="nav-link" href="ListasCarrerasGenerales">
-                <span class="oi oi-book" aria-hidden="true"></span>Agregar Carrera Univer.
-            </NavLink>
-        </div>
+       
+        
+        
+       
+        
+
+        
+         
     </nav>
 </div>
 

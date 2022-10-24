@@ -1,0 +1,18 @@
+﻿<EditForm Model="@_materiasTotales" OnValidSubmit="@OnValidSumit">
+    <div class="form-field">
+         <label>Nombre De la Materia Universitaria:</label>
+         <div>
+             <InputText @bind-Value="@_materiasTotales.NombresMaterias"/>
+             <ValidationMessage For="@(()=>_materiasTotales.NombresMaterias)"/>
+         </div>
+         
+     </div>
+     <button type="submit" class="btn btn-success">@NombreBoton</button>
+     <DataAnnotationsValidator/>
+</EditForm>
+
+@code {
+    [Parameter] public MateriasTotalesUni _materiasTotales { get; set; } = new MateriasTotalesUni();
+    [Parameter] public string NombreBoton { get; set; } = "Agregar Materia";
+    [Parameter] public EventCallback OnValidSumit { get; set; }
+}

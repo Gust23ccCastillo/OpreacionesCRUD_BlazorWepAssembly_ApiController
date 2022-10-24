@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using OpreacionesCRUD_BlazorWepAssembly_ApiController.Shared.Modelos;
+using OpreacionesCRUD_BlazorWepAssembly_ApiController.Shared.Modelos.InterfacesModelos;
 
 namespace OpreacionesCRUD_BlazorWepAssembly_ApiController.Server.Controllers
 {
@@ -17,28 +17,29 @@ namespace OpreacionesCRUD_BlazorWepAssembly_ApiController.Server.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<List<CarreraUniversidad>>> GetCarreras()
+        public async Task<ActionResult<List<CarrerasTotalesUni>>> GetCarreras()
         {
-            return await _dbContext._carreraUniversidad.ToListAsync();
+            return await _dbContext._carrerasTotalesUnis.ToListAsync();
         }
+
         [HttpGet("{id}", Name = "obtenerCarrera")]
-        public async Task<ActionResult<CarreraUniversidad>> GetCarreras(int id)
+        public async Task<ActionResult<CarrerasTotalesUni>> GetCarreras(int id)
         {
-            return await _dbContext._carreraUniversidad.FirstOrDefaultAsync(x => x.IdCarrera == id);
+            return await _dbContext._carrerasTotalesUnis.FirstOrDefaultAsync(x => x.IdCarrera == id);
         }
 
         [HttpPost]
-        public async Task<ActionResult> AgregarCarrera(CarreraUniversidad carreraUniversidad)
+        public async Task<ActionResult> AgregarCarrera(CarrerasTotalesUni carrerasTotalesUni)
         {
-            _dbContext.Add(carreraUniversidad);
+            _dbContext.Add(carrerasTotalesUni);
             await _dbContext.SaveChangesAsync();
-            return new CreatedAtRouteResult("obtenerCarrera", new { id = carreraUniversidad.IdCarrera }, carreraUniversidad);
+            return new CreatedAtRouteResult("obtenerCarrera", new { id = carrerasTotalesUni.IdCarrera }, carrerasTotalesUni);
         }
 
         [HttpDelete("{id}")]
         public async Task<ActionResult> EliminarCarrera(int id)
         {
-            var _CarreraGeneral = new CarreraUniversidad { IdCarrera = id };
+            var _CarreraGeneral = new CarrerasTotalesUni { IdCarrera = id };
             _dbContext.Remove(_CarreraGeneral);
             await _dbContext.SaveChangesAsync();
             return NoContent();

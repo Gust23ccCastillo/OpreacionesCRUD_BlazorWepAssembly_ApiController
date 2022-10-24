@@ -5,9 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OpreacionesCRUD_BlazorWepAssembly_ApiController.Shared.Modelos
+namespace OpreacionesCRUD_BlazorWepAssembly_ApiController.Shared.Modelos.InterfacesModelos
 {
-    public class Usuarios
+    public class Usuarios:IUsuarioLogeo,IEstudiante
     {
         public int Id { get; set; }
         [Required(ErrorMessage ="El Campo {0} es Requerido!!."),StringLength(20)]
@@ -25,11 +25,19 @@ namespace OpreacionesCRUD_BlazorWepAssembly_ApiController.Shared.Modelos
         [Required(ErrorMessage = "El Campo {0} es Requerido!!."), StringLength(100)]
         public string ? Roles { get; set; }
 
-        [Required,StringLength(500)]
-        public string? carreras { get; set; }
+        [Required(ErrorMessage = "El Campo {0} es Requerido!!."), StringLength(15)]
+        public string? Cuatrimestre { get; set; }
 
-        [Required, StringLength(500)]
-        public string? Materias { get; set; }
+        public List<CarreraEstudiante> CarreraEstudianteList { get; set; } = new List<CarreraEstudiante>();
+
+        public List<MateriasEstudiante> MateriasEstudianteList { get; set; } = new List<MateriasEstudiante>();
+        
+
+        //[Required,StringLength(500)]
+        //public string? carreras { get; set; }
+
+        //[Required, StringLength(500)]
+        //public string? Materias { get; set; }
 
 
     }

@@ -1,4 +1,5 @@
 ﻿@page "/CrearUsuario"
+@attribute [Authorize(Roles ="Administrator")]
 @inject   HttpClient _http
 @inject NavigationManager _NavigationManager
 <h3>Nuevo Usuario</h3>
@@ -8,17 +9,7 @@
 @code {
 
     Usuarios _Usuario = new Usuarios();
-    //MateriasUniversidad _materias = new MateriasUniversidad();
-    //List<MateriasUniversidad> materias = new List<MateriasUniversidad>()
-    //    {
-    //        new MateriasUniversidad(){Id=1,Name="Ingles basico"},
-    //        new MateriasUniversidad(){Id=2,Name="Matematica General"},
-    //        new MateriasUniversidad(){Id=3,Name="Laboratorio I"},
-    //        new MateriasUniversidad(){Id=4,Name="Elementos de computacion"},
-    //        new MateriasUniversidad(){Id=5,Name="Laboratorio de materiales II"},
-    //        new MateriasUniversidad(){Id=6,Name="BASES DE DATOS I"},
-    //        new MateriasUniversidad(){Id=7,Name="REQUERIMIENTOS DE SOFTWARE"},
-    //    };
+    
     async Task CrearUsuario()
     {
         await _http.PostAsJsonAsync<Usuarios>("Users",_Usuario);

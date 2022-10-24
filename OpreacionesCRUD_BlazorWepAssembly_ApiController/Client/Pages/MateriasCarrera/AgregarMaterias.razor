@@ -1,0 +1,19 @@
+﻿@page "/NuevasMaterias"
+@attribute [Authorize(Roles ="Administrator")]
+@inject HttpClient _http
+@inject NavigationManager _NavigationManager
+
+
+<h3>Agregar Nueva Materia</h3>
+<FormularioMateriasUniversidad _materiasTotales="@_materiasTotalesUni" NombreBoton="Agregar Materia" OnValidSumit="CrearMateria"/>
+@code {
+
+     MateriasTotalesUni _materiasTotalesUni = new MateriasTotalesUni();
+
+     async Task CrearMateria()
+    {
+        await _http.PostAsJsonAsync<MateriasTotalesUni>("MateriasGenerales",_materiasTotalesUni);
+        _NavigationManager.NavigateTo("ListasMateriasGenerales");
+
+    }
+}

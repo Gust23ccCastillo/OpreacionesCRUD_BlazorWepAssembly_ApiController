@@ -1,4 +1,5 @@
 ﻿@page "/Usuarios"
+@attribute [Authorize(Roles ="Administrator")]
 @inject HttpClient Http
 @inject IJSRuntime js
 <h3>Estudiantes</h3>
@@ -39,8 +40,15 @@ else
                <td>@usuarios.Nombre</td>
                <td>@usuarios.Clave</td>
                <td>@usuarios.Roles</td>
-               <td>@usuarios.carreras</td>
-               <td>@usuarios.Materias</td>
+               @foreach (var carreraEst in @usuarios.CarreraEstudianteList)
+               {
+                         <td>@carreraEst.NombreCarrera</td>
+               }
+               @foreach (var MateriasEst in @usuarios.MateriasEstudianteList)
+               {
+                         <td>@MateriasEst.NombresMaterias</td>
+               }
+              
                
              </tr>
            }
@@ -50,23 +58,24 @@ else
 @code {
 
     Usuarios[]? _Usuarios{ get; set; }
+    
+
+
 
 
     protected override async Task OnInitializedAsync()
     {
         await CargarUsuarios();
+
     }
 
     async Task CargarUsuarios()
     {
         _Usuarios = await Http.GetFromJsonAsync<Usuarios[]>("Users");
-        _Usuarios = new Usuarios[]
-
-        {
-            new Usuarios(){Id = 1, Nombre = "Felipe",Clave="123",Roles="Estudiante",carreras ="Ingenieria en Sistemas Computacionales",Materias =  "Programacion I, Base de Datos I"},
-            new Usuarios(){Id = 2, Nombre = "Andres",Clave="456",Roles="Estudiante", carreras ="Ingenieria Civil",Materias =  "Arquitectura  I, Diseno y Acabado I"}
-        }; 
+       
     }
+
+   
 
     async Task BorrarUsuarios(int IdUsuario)
     {

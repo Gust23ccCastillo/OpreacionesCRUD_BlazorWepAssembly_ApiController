@@ -5,14 +5,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OpreacionesCRUD_BlazorWepAssembly_ApiController.Shared.Modelos
+namespace OpreacionesCRUD_BlazorWepAssembly_ApiController.Shared.Modelos.InterfacesModelos
 {
-    public class MateriasUniversidad
+    public class MateriasEstudiante:IMaterias
     {
         [Key]
         public int IdMaterias { get; set; }
 
-        [Required, StringLength(50)]
+        [Required, StringLength(250)]
         public string ? NombresMaterias { get; set; }
 
         

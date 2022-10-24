@@ -1,4 +1,5 @@
-﻿<EditForm Model="@_UsuarioGeneral" OnValidSubmit="@OnValidSumit">
+﻿@inject HttpClient _http
+<EditForm Model="@_UsuarioGeneral" OnValidSubmit="@OnValidSumit">
      <div class="form-field">
          <label>Nombre:</label>
          <div>
@@ -21,83 +22,84 @@
           <label>Roles Usuario:</label>
            <div>
                 <InputSelect class="form-select" @bind-Value="@_UsuarioGeneral.Roles"> 
-                    <option value="0" selected>Estudiante</option>
-                    <option value="1" selected>Administrador</option>
+                    <option value="Estudiante" selected>Estudiante</option>
+                    <option value="Administrador" selected>Administrador</option>
                     <ValidationMessage For="@(()=>_UsuarioGeneral.Roles)"/>
                    
                 
                 </InputSelect>
            </div>
 
-          <label>Carrera Universidad:</label>
-           <div>
-                <InputSelect class="form-select" @bind-Value="@_UsuarioGeneral.carreras"> 
-                    <option value="0" selected>Ing. Quimica Industrial</option>
-                    <option value="1" selected>Ing. Sistemas Computacionales</option>
-                    <option value="2" selected>Psicologia</option>
-                    <option value="3" selected>Ing. Arquitectura</option>
-                    <option value="4" selected>Administracion de Empresas</option>
-                    <option value="5" selected>Ing. Informatica Empresarial</option>
+          @*<div>
+              <InputSelect class="form-select" @bind-Value="@_UsuarioGeneral.CarreraEstudianteList">
+                @foreach (var carreraSelect in @_Carreras)
+                {
+                <option value="@carreraSelect.NombreCarrera" selected>@carreraSelect.NombreCarrera</option>
+
+                }
+
+              </InputSelect>
+          </div>*@
+
+         @* <label>Materia</label>
+             <div>
+               
                 
-                </InputSelect>
-           </div>
+                    <InputSelect class="form-select" @bind-Value="@_UsuarioGeneral.MateriasEstudianteList">
+                        @foreach (var item in _materiasTotales)
+                        {
+                             <option value="@item.NombresMaterias">@item.NombresMaterias</option>
+                        }       
+                            
+                    </InputSelect>
+                  
 
-
-            <label>Las Materias Son 4 Maximas Por Cuatrimestre:</label>
-            <br/>
-
-           <label>Materia 01 del Usuario:</label>
-           <div>
-                <InputSelect class="form-select" @bind-Value="@_UsuarioGeneral.Materias"> 
-                    <option value="0" selected>Sin Materias</option>
-                    <option value="1" selected>Ingles basico</option>
-                    <option value="2" selected>BASES DE DATOS I</option>
-                    <option value="3" selected>Elementos de computacion</option>
-                    <option value="4" selected>REQUERIMIENTOS DE SOFTWARE</option>
-                    <option value="5" selected>Laboratorio de materiales II</option>
+                   
                 
-                </InputSelect>
-           </div>
-
-            <label>Materia 02 del Usuario:</label>
-           <div>
-                <InputSelect class="form-select" @bind-Value="@_UsuarioGeneral.Materias"> 
-                    <option value="0" selected>Sin Materias</option>
-                    <option value="1" selected>Ingles basico</option>
-                    <option value="2" selected>BASES DE DATOS I</option>
-                    <option value="3" selected>Elementos de computacion</option>
-                    <option value="4" selected>REQUERIMIENTOS DE SOFTWARE</option>
-                    <option value="5" selected>Laboratorio de materiales II</option>
-                
-                </InputSelect>
-           </div>
-
-            <label>Materia 03 del Usuario:</label>
-           <div>
-                <InputSelect class="form-select" @bind-Value="@_UsuarioGeneral.Materias"> 
-                    <option value="0" selected>Sin Materias</option>
-                    <option value="1" selected>Ingles basico</option>
-                    <option value="2" selected>BASES DE DATOS I</option>
-                    <option value="3" selected>Elementos de computacion</option>
-                    <option value="4" selected>REQUERIMIENTOS DE SOFTWARE</option>
-                    <option value="5" selected>Laboratorio de materiales II</option>
-                
-                </InputSelect>
-           </div>
-
-            <label>Materia 04 del Usuario:</label>
-           <div>
-                <InputSelect class="form-select" @bind-Value="@_UsuarioGeneral.Materias"> 
-                    <option value="0" selected>Sin Materias</option>
-                    <option value="1" selected>Ingles basico</option>
-                    <option value="2" selected>BASES DE DATOS I</option>
-                    <option value="3" selected>Elementos de computacion</option>
-                    <option value="4" selected>REQUERIMIENTOS DE SOFTWARE</option>
-                    <option value="5" selected>Laboratorio de materiales II</option>
-                
-                </InputSelect>
-           </div>
-         
+             </div>*@
+          @*<div class="form-group">
+              <div class="form-group">
+                  <button type="button" class="btn btn-secondary"
+                  onclick="@(()=>@_UsuarioGeneral.MateriasEstudianteList.Add(new MateriasEstudiante()))">Agregar Materias</button>
+              </div>
+               <label>Materia</label>
+                 @foreach (var EnviarMaterias in _UsuarioGeneral.MateriasEstudianteList )
+                { 
+                    <InputSelect class="form-select" @bind-Value="@EnviarMaterias.NombresMaterias">
+                                @foreach (var item in _materiasTotales)
+                                {
+                                    <option value="@item.NombresMaterias">@item.NombresMaterias</option>
+                    
+                               }
+                    </InputSelect>
+                    
+                }
+              @for (var i = 0; i < @_UsuarioGeneral.MateriasEstudianteList.Count; i++)
+              {
+                var indice = i;
+                var materias = @_UsuarioGeneral.MateriasEstudianteList[i];
+                <h5>Materia @(i+1)</h5>
+                <div class="form-group">
+                    <label>Materia</label>
+                   
+                </div>
+                  @foreach (var EnviarMaterias in _UsuarioGeneral.MateriasEstudianteList )
+                { 
+                    <InputSelect class="form-select" @bind-Value="@EnviarMaterias.NombresMaterias">
+                                <option value="">I</option>
+                                <option value="">II</option>
+                                <option value="">III</option>
+                    </InputSelect>
+                    
+                }
+                 
+                        
+                        
+                  
+              }
+              
+                      
+          </div>*@
          
      </div>
      <button type="submit" class="btn btn-success">@NombredelBoton</button>
@@ -106,7 +108,31 @@
 
 @code {
 
+    //CarrerasTotalesUni[]? _Carreras { get; set; }
+    //MateriasTotalesUni[]? _materiasTotales{ get; set; }
+    //CarreraEstudiante? estudiantesCarr{ get; set; }
+
+
+
     [Parameter] public Usuarios _UsuarioGeneral { get; set; } = new Usuarios();
     [Parameter] public  string NombredelBoton { get; set; } = "Guardar Usuario";
     [Parameter] public EventCallback OnValidSumit { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        //await CargarSelectCarrera();
+       //await CargarSelectMaterias();
+    }
+
+    //async Task CargarSelectCarrera()
+    //{
+    //    _Carreras = await _http.GetFromJsonAsync<CarrerasTotalesUni[]>("CarrerasGenerales");
+       
+    //}
+    //async Task CargarSelectMaterias()
+    //{
+    //    _materiasTotales = await _http.GetFromJsonAsync<MateriasTotalesUni[]>("MateriasGenerales");
+       
+    //}
+
 }

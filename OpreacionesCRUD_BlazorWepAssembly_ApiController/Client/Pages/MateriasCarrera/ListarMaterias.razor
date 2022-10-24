@@ -1,0 +1,75 @@
+﻿@page "/ListasMateriasGenerales"
+@attribute [Authorize(Roles ="Administrator")]
+@inject HttpClient Http
+@inject IJSRuntime js
+
+<div>
+    <a class="btn btn-success" href="NuevasMaterias">Nueva Materia</a>
+</div>
+
+<h3>Lista De Todas Las Materias</h3>
+
+
+@if (_materiasTotalesUnis == null)
+{
+    <text>Cargando...</text>
+}
+else if (_materiasTotalesUnis.Length == 0)
+{
+    <text>Materias No Disponibles!!.</text>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th></th>
+                <th>Id</th>
+                <th>Nombre De Materia Universitaria</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var materias in _materiasTotalesUnis)
+           {
+             <tr>
+               <td>
+
+                   <button class="btn btn-danger" @onclick="@(()=>BorrarUsuarios(materias.IdMaterias))">Eliminar Carrera</button>
+               </td>
+               <td>@materias.IdMaterias</td>
+               <td>@materias.NombresMaterias</td>
+              
+               
+             </tr>
+           }
+        </tbody>
+    </table>
+}
+
+@code {
+     MateriasTotalesUni[]? _materiasTotalesUnis { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        await CargarMaterias();
+    }
+
+    async Task CargarMaterias()
+    {
+        _materiasTotalesUnis = await Http.GetFromJsonAsync<MateriasTotalesUni[]>("MateriasGenerales");
+       
+    }
+
+    async Task BorrarUsuarios(int IdMaterias)
+    {
+        var UsuarioSelect = _materiasTotalesUnis.First(x => x.IdMaterias == IdMaterias);
+        string mensajeEliminar = $"Deses Eliminar la Materia Universitaria del Sistema? : {UsuarioSelect.NombresMaterias}";
+        if (await js.InvokeAsync<bool>("confirm", mensajeEliminar))
+        {
+             await Http.DeleteAsync($"MateriasGenerales/{IdMaterias}");
+             await CargarMaterias();
+        }
+       
+    }
+
+}

@@ -1,6 +1,9 @@
 ﻿@page "/fetchdata"
+@attribute [Authorize(Roles ="Administrator,User")]
 @using OpreacionesCRUD_BlazorWepAssembly_ApiController.Shared
 @inject HttpClient Http
+@inject AuthenticationStateProvider _AuthStateProvider
+@inject NavigationManager _NavegateManager
 
 <PageTitle>Weather forecast</PageTitle>
 
@@ -42,6 +45,17 @@ else
 
     protected override async Task OnInitializedAsync()
     {
-        forecasts = await Http.GetFromJsonAsync<WeatherForecast[]>("WeatherForecast");
+        var customStateProvider = (CustomAuthenticationStateProvider)_AuthStateProvider;
+        var Token = await customStateProvider.GetToken();
+        if (!string.IsNullOrWhiteSpace(Token))
+        {
+            Http.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("bearer", Token);
+            forecasts = await Http.GetFromJsonAsync<WeatherForecast[]>("WeatherForecast");
+        }
+        else
+        {
+            _NavegateManager.NavigateTo("/loginUsuario");
+        }
+
     }
 }

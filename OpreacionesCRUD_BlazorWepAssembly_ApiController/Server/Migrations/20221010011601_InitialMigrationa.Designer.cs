@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using OpreacionesCRUD_BlazorWepAssembly_ApiController.Server;
 
@@ -11,9 +12,10 @@ using OpreacionesCRUD_BlazorWepAssembly_ApiController.Server;
 namespace OpreacionesCRUD_BlazorWepAssembly_ApiController.Server.Migrations
 {
     [DbContext(typeof(ApplicationsDBContext))]
-    partial class ApplicationsDBContextModelSnapshot : ModelSnapshot
+    [Migration("20221010011601_InitialMigrationa")]
+    partial class InitialMigrationa
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

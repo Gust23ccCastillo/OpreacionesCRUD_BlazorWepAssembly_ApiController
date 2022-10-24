@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OpreacionesCRUD_BlazorWepAssembly_ApiController.Shared.Modelos
+namespace OpreacionesCRUD_BlazorWepAssembly_ApiController.Shared.Modelos.InterfacesModelos
 {
     public interface IUsuarioLogeo
     {

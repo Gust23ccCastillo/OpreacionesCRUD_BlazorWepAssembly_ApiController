@@ -4,16 +4,19 @@
  * Microsoft.EntityFrameworkCore.SqlServer 6.0.9
  * Microsoft.EntityFrameworkCore.Design 6.0.9
  * Microsoft.EntityFrameworkCore.Tools 6.0.9
- * 
+ * System.IdentityModel.Tokens.Jwt 6.23.1
+ * Authentication.JwtBearer 6.0.10
  * 
  * 
  */
 
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.ResponseCompression;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 using OpreacionesCRUD_BlazorWepAssembly_ApiController.Server;
-
-
+using OpreacionesCRUD_BlazorWepAssembly_ApiController.Server.Authentications;
+using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -21,6 +24,23 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllersWithViews();
 builder.Services.AddRazorPages();
+builder.Services.AddAuthentication(o =>
+{
+    o.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+    o.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+}).AddJwtBearer(o=>
+{
+    o.RequireHttpsMetadata = false;
+    o.SaveToken = true;
+    o.TokenValidationParameters = new TokenValidationParameters
+    {
+        ValidateIssuerSigningKey = true,
+        IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(JwtAuthenticationManager.JWT_SECURITY_KEY)),
+        ValidateIssuer = false,
+        ValidateAudience = false,
+    };
+});
+builder.Services.AddSingleton<UserAccountServices>();
 
 //configuracion para la Conexion a la Base de Datos..
 builder.Services.AddDbContext<ApplicationsDBContext>(options =>
@@ -51,7 +71,8 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
-
+app.UseAuthentication();
+app.UseAuthorization();
 app.MapRazorPages();
 app.MapControllers();
 app.MapFallbackToFile("index.html");

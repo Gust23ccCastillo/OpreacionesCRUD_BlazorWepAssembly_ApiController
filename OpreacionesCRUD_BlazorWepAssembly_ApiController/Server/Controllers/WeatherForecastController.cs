@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using OpreacionesCRUD_BlazorWepAssembly_ApiController.Shared;
 
@@ -19,7 +20,9 @@ namespace OpreacionesCRUD_BlazorWepAssembly_ApiController.Server.Controllers
             _logger = logger;
         }
 
+        
         [HttpGet]
+        [Authorize(Roles = "Administrator,User")]
         public IEnumerable<WeatherForecast> Get()
         {
             return Enumerable.Range(1, 5).Select(index => new WeatherForecast

@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using OpreacionesCRUD_BlazorWepAssembly_ApiController.Shared.Modelos;
+using OpreacionesCRUD_BlazorWepAssembly_ApiController.Shared.Modelos.InterfacesModelos;
 
 namespace OpreacionesCRUD_BlazorWepAssembly_ApiController.Server
 {
@@ -8,11 +9,18 @@ namespace OpreacionesCRUD_BlazorWepAssembly_ApiController.Server
         public ApplicationsDBContext(DbContextOptions<ApplicationsDBContext> options) :base(options)
         {
 
+
         }
 
         public DbSet<Usuarios> _usuarios { get; set; }
-        public DbSet<CarreraUniversidad> _carreraUniversidad { get; set; }
-        //public DbSet<MateriasUniversidad> _materiasUniversidad { get; set; }
+        public DbSet<CarreraEstudiante> _carreraEstudiante { get; set; }
+
+        public DbSet<CarrerasTotalesUni> _carrerasTotalesUnis { get; set; }
+        public DbSet<MateriasEstudiante> _materiasEstudiante { get; set; }
+
+        public DbSet<MateriasTotalesUni> _materiasTotalesUni { get; set; }
+
+
     }
 
 }

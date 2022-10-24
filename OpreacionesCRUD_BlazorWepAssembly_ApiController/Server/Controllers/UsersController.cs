@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using OpreacionesCRUD_BlazorWepAssembly_ApiController.Shared.Modelos;
+using OpreacionesCRUD_BlazorWepAssembly_ApiController.Shared.Modelos.InterfacesModelos;
 
 namespace OpreacionesCRUD_BlazorWepAssembly_ApiController.Server.Controllers
 {
@@ -20,7 +20,11 @@ namespace OpreacionesCRUD_BlazorWepAssembly_ApiController.Server.Controllers
         [HttpGet]
         public async Task<ActionResult<List<Usuarios>>> GetUsuarios()
         {
-            return await _dbContext._usuarios.ToListAsync();
+            return _dbContext._usuarios
+                .Include(c=>c.CarreraEstudianteList)
+                .Include(m=>m.MateriasEstudianteList)
+                .ToList();
+                
         }
 
         [HttpGet("{id}",Name = "obtenerUsuario")]

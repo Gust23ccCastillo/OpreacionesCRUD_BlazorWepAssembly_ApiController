@@ -1,4 +1,5 @@
 ﻿@page "/NuevaCarrera"
+@attribute [Authorize(Roles ="Administrator")]
 @inject HttpClient _http
 @inject NavigationManager _NavigationManager
 
@@ -8,11 +9,11 @@
 <FormularioCarrerasUniversitarias _carreraUniversidad="@_carreraUniversidad" NombreBoton="Agregar Carrera" OnValidSumit="@CrearCarrera"/>
 
 @code {
-    CarreraUniversidad _carreraUniversidad = new CarreraUniversidad();
+    CarrerasTotalesUni _carreraUniversidad = new CarrerasTotalesUni();
 
      async Task CrearCarrera()
     {
-        await _http.PostAsJsonAsync<CarreraUniversidad>("CarrerasGenerales",_carreraUniversidad);
+        await _http.PostAsJsonAsync<CarrerasTotalesUni>("CarrerasGenerales",_carreraUniversidad);
         _NavigationManager.NavigateTo("ListasCarrerasGenerales");
 
     }
